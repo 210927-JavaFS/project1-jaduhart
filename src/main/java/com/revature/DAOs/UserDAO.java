@@ -15,4 +15,5 @@ public interface UserDAO {
 	public Ers_Users UserEmail(String email);
 	public Ers_Users findUserPass (int id);
 	//public int onlyAccID(int id);
+	public Ers_Users getUserByName(String name);
 }

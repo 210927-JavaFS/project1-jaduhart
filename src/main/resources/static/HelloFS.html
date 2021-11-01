@@ -10,7 +10,16 @@
 <body class="container-fluid">
   <div class="row">
     <button id="pastReimButton" class="btn btn-success">Past Tickets</button>  
-    <button id="loginButton" class="btn btn-success">Login</button>  
+    <!-- <button id="loginButton" class="btn btn-success">Login</button>   -->
+  </div>
+  <div class="formClass" id="loginOrOut">
+    <form class="form-control">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" />
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" />
+    </form>
+    <button class="btn btn-danger" id="loginButton">Login</button>
   </div>
 
   <table class="table">
@@ -67,7 +76,8 @@
     <label for="homeCountry">Home's Country</label>
     <input type="text" id="homeCountry" name="homeCountry"> -->
   </form>
-  <button class="btn btn-primary" id="addReimButton">Add Your Reimbursement</button>
+  <button class="btn btn-primary" id="addReimButton">Show Reimbursements</button>
+  <button class="btn btn-primary" id="showUsersButton">Show Users</button>
 
   <script src="HelloFS.js?2"></script>
 </body>

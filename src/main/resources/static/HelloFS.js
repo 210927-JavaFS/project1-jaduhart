@@ -4,12 +4,16 @@ let buttonRow = document.getElementById("buttonRow");
 let pastReimButton = document.getElementById("pastReimButton");
 let addReimButton = document.getElementById('addReimButton');
 let loginButton = document.getElementById('loginButton');
+let getReimButton = document.createElement('getReim');
+let getUsersButton = document.getElementById('showUsersButton')
 let curUser = null
 
 pastReimButton.onclick = getReims;
 // reimButton.onclick = getreims;
 addReimButton.onclick = getReims;//was addReim
 loginButton.onclick = loginToApp; 
+getReimButton.innerText = "get Reimbursements";
+getUsersButton.onclick = getUsers;
 
 // avengerButton.innerText = "Avengers Assemble";
 // reimButton.innerText = "See reims";
@@ -28,8 +32,8 @@ async function loginToApp(){
 
   if(response.status===200){
     document.getElementsByClassName("formClass")[0].innerHTML = '';
-    buttonRow.appendChild(avengerButton);
-    buttonRow.appendChild(reimButton);
+    buttonRow.appendChild(getReimButton);
+   // buttonRow.appendChild(reimButton);
   }
   else{
     let para = document.createElement("p");
@@ -48,7 +52,7 @@ async function getReims(){
     let data = await response.json();
     populateReimTable(data);
   }else{
-    console.log("The Avengers are too busy saving the planet to respond.");
+    console.log("ResponseStat !=200, populateReimTable never called");
   }
 };
 
@@ -70,9 +74,11 @@ function populateReimTable(data){
       }
       else if((cell=="submitted"||cell=="resolved")&&Ers_Reimbursement[cell]){//if null: false. else true.
              
-        td.innerText = `${convertTimestamp(Ers_Reimbursement[cell])} ${Ers_Reimbursement[cell].Reimb_Amt}: 
+        td.innerText = `${convertTimestamp(Ers_Reimbursement[cell])} ${Ers_Reimbursement[cell].Reimb_Amt} 
         ${Ers_Reimbursement[cell].Reimb_StatId} ${Ers_Reimbursement[cell].Reimb_TypeId} `
-      }
+      } 
+
+
     //else if(cell=="receipt"&&Ers_Reimbursement[cell]){//if null: false. else true.
     //     td.innerText = `${Ers_Reimbursement[cell]}  `
     // }else if(Ers_Reimbursement[cell]){
@@ -94,13 +100,13 @@ function convertTimestamp(unix_timestamp){
   return date;
 }
 
-async function get(){
-  let response = await fetch(URL+"Ers_Reimbursements");
+async function getUsers(){
+  let response = await fetch(URL+"users");
   if(response.status===200){
     let data = await response.json();
-    populateReimTable(data);
+    populateUserTable(data);
   }else{
-    console.log("Reimbursements not available.");
+    console.log("Users not available.");
   }
 }
 
@@ -113,7 +119,16 @@ function populateUserTable(data){
     let row = document.createElement("tr");
     for(let cell in home){
       let td = document.createElement("td");
-      td.innerText = home[cell];
+     
+      // if(cell!="user"){
+      //   td.innerText=home[cell];
+      // }
+      // else if((cell=="submitted"||cell=="resolved")&&home[cell]){//if null: false. else true.
+             
+      //   td.innerText = ` ${home[cell].User_Id} 
+      //   ${home[cell].Username}${home[cell].First_Name}${home[cell].Last_Name} ${home[cell].Email} ${home[cell].User_Role} `
+      // } 
+       td.innerText = home[cell];
       row.appendChild(td);
     }
     tbody.appendChild(row);

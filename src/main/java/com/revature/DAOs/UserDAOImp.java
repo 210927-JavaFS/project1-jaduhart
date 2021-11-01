@@ -66,7 +66,24 @@ public class UserDAOImp implements UserDAO {
 	    Ers_Users user = list.get(0);
         return user;
 	}
-
+	
+	@Override
+	public Ers_Users getUserByName(String name) {
+		Session session = HibUtil.getSession();
+		Query query = session.createQuery(" FROM Ers_Users WHERE Ers_Users.Username = " +name);
+		query.setParameter("userName", name);
+		List<Ers_Users> list = query.list();
+		
+	    Ers_Users user = list.get(0);
+		
+//		List<Ers_Users> list = session.createQuery(" FROM Ers_Users WHERE Ers_Users.Username = " + name).list();
+//	    Ers_Users user = list.get(0);
+        return user;
+		
+//		Session session = HibUtil.getSession();
+		
+//        return user;
+	}
 	@Override
 	public Ers_Users findUserPass(int id) {
 		Session session = HibUtil.getSession();

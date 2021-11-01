@@ -22,7 +22,7 @@ public class ReimbursementDAOImp implements ReimbursementDAO {
 	@Override
 	public List<Ers_Reimbursement> findAll() {
 		Session session = HibUtil.getSession();
-		return session.createQuery("FROM Ers_Reibursement").list();
+		return session.createQuery("FROM Ers_Reimbursement").list();
 	}
 
 	@Override

@@ -26,7 +26,7 @@ public class UserDAOImp implements UserDAO {
 	}
 
 	@Override
-	public List<Ers_Users> getUserID(int id) {
+	public List<Ers_Users> getUserID(String id) {
 		Session session = HibUtil.getSession();
 		return session.createQuery("FROM Ers_Users WHERE Ers_Users.User_Id = " + id).list();
 	}

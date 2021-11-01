@@ -32,10 +32,10 @@ public class Ers_Reimbursement {
 	@JoinColumn(name = "User_Id", insertable = false, updatable = false)
 	private Ers_Users Reimb_Res;
 	@ManyToOne(fetch =FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "Reimb_Status_Id", insertable = false, updatable = false)
+	@JoinColumn(name = "Reimb_Status_Id")
 	private Ers_Reimb_Status Reimb_StatId;
-	@ManyToOne(fetch =FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "Reimb_Type_Id", insertable = false, updatable = false)
+	@ManyToOne(fetch =FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "Reimb_Type_Id")
 	private Ers_Reimb_Type Reimb_TypeId;
 	
 	

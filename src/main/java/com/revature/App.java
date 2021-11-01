@@ -42,7 +42,7 @@ public class App {
 		
 		//insert(userRole2);
 		//insert(userRole1);
-		insert(ers_User4);
+		//insert(ers_User4);
 		ers_User4 = userDao.UserEmail("judiaz@email.com");
 		
 		Ers_Reimb_Type type1 = new Ers_Reimb_Type(1, "LODGING");
@@ -60,23 +60,26 @@ public class App {
 		Ers_Reimb_Type type4 = new Ers_Reimb_Type(4, "OTHER");
 		//Ers_Reimb_Status stat4 = new Ers_Reimb_Status(1,"PENDING");
 		Ers_Reimbursement Reimb4 = new Ers_Reimbursement(400,ts,ts,"Metal Box", ers_User4, null, stat1, type4);
+		Ers_Reimbursement Reimb5 = new Ers_Reimbursement(400,ts,ts,"Palgid", ers_User4, null, stat3, type4);
+		//insert(Reimb5);
+		
 		//insert(userRole1);
 		//insert(ers_User1);
 //		insert(type1);
 //		insert(stat1);
-		insert(Reimb1);
+		//insert(Reimb1);
 		
-		insert(ers_User2);
+		//insert(ers_User2);
 //		insert(type2);
 //		insert(stat2);
-		insert(Reimb2);
-		insert(ers_User3);
+		//insert(Reimb2);
+		//insert(ers_User3);
 		//insert(type3);
 		//insert(stat3);
-		insert(Reimb3);
+		//insert(Reimb3);
 		
 		//insert(type4);
-		insert(Reimb4);
+		//insert(Reimb4);
 		
 		app = Javalin.create((config)->{
 			config.addStaticFiles("/static", Location.CLASSPATH);

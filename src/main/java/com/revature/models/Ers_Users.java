@@ -26,7 +26,7 @@ public class Ers_Users {
 	private String Last_Name;
 	@Column (unique = true)
 	private String Email;
-	@ManyToOne(fetch =FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch =FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "User_Role_Id")
 	private Ers_User_Roles User_Role;
 	

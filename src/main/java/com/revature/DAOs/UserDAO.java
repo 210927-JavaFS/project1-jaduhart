@@ -9,7 +9,7 @@ import com.revature.models.Ers_Users;
 public interface UserDAO {
 	public List<Ers_Users> findAll();
 	public Ers_Users findUser(int id);
-	public List<Ers_Users> getUserID(int id);
+	public List<Ers_Users> getUserID(String string);
 	public boolean addUser(Ers_Users user);
 	public Ers_Users getRole(int id);
 	public Ers_Users UserEmail(String email);

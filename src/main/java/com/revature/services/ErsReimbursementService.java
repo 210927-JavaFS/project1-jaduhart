@@ -29,7 +29,7 @@ private ReimbursementDAO reimDao = new ReimbursementDAOImp();
 		return reimDao.updateReim(reim);
 	}
 	
-	public List<Ers_Reimbursement> getPastReim(int id) {
+	public List<Ers_Reimbursement> getPastReim(String id) {
 		return reimDao.findAllPast(id);
 		
 	}

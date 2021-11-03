@@ -8,23 +8,66 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body class="container-fluid">
-  <div class="row">
-    <button id="pastReimButton" class="btn btn-success">Past Tickets</button>  
-    <div id="buttonRow" class="btn btn-success">Login </div>
-  <div class="formClass" id="loginOrOut">
-    <form class="form-control">
-      <label for="username">Username</label>
-      <input type="text" id="username" name="username" />
-      <label for="password">Password</label>
-      <input type="password" id="password" name="password" />
-    </form>
-    <button class="btn btn-danger" id="loginButton">Login</button>
-  </div>
+ 
+</body>
 
-  <table class="table">
+  <div id="root">
+    <div class="formClass" id="loginOrOut">
+     
+      <!-- <div id="buttonRow" class="btn btn-success">Login </div> -->
+    
+      <form class="form-control">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" />
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" />
+      </form>
+      <button class="btn btn-danger" id="loginButton">Login</button>
+    </div>
+    
+    <div class = "row" id = "allUsersButtonForm">
+
+      <button id="pastReimButton" class="btn btn-success">Past Tickets</button> 
+
+        <form class="form-control" id = "addReimbForm">
+          <label for="reimType">Reimbursement Type </label>
+          <input type="text" id="reimType" name="reimType">
+          <label for="reimAmount">Amount</label>
+          <input type="text" id="reimAmount" name="reimAmount">
+          <label for="reimDescription">Description</label>
+          <input type="text" id="reimDescription" name="reimDescription">
+        </form>
+        
+        <button class="btn btn-primary" id="addReimButton">Add Reimbursement</button>
+        
+        <form>
+          <label for="statId">Status ID (by int)</label>
+          <input type="text" id="statId" name="statId">
+        </form>
+        <form>
+          <label for="alterId">Which Reim to change (by id)</label>
+          <input type="text" id="alterId" name="alterId">
+        </form>
+        <form>
+          <label for="newStat">Change to what status</label>
+          <input type="text" id="newStat" name="newStat">
+        </form>
+
+    </div>
+
+
+    <div class = "row" id = "adminButtonForm">
+      <button class="btn btn-primary" id="showReimButton">Show Reimbursements</button>
+      <button class="btn btn-primary" id="showUsersButton">Show Users</button>
+      <button class="btn btn-primary" id="filterStatusButton">Filter By Status</button>
+      <button class="btn btn-primary" id="getReimButton">see if returns reim by Id</button>
+  </div>
+  
+
+</div>
+  <!-- <table class="table">
     <thead>
       <tr>
-        <!--make these match the user and reimbursement tables-->
         <th class="col-sm-1">User ID</th>
         <th class="col-sm-2">Username</th>
         <th class="col-sm-1">First Name</th>
@@ -35,7 +78,7 @@
     </thead>
     <tbody id="userBody">
     </tbody>
-  </table>
+  </table> -->
   <br>
   <br>
   <table class="table">
@@ -69,12 +112,12 @@
 
   <form class="form-control">
     <!--make these form button labels-->
-    <label for="reimType">Reimbursement Type (1-4)</label>
+    <!-- <label for="reimType">Reimbursement Type (1-4)</label>
     <input type="text" id="reimType" name="reimType">
     <label for="reimAmount">Amount</label>
     <input type="text" id="reimAmount" name="reimAmount">
     <label for="reimDescription">Description</label>
-    <input type="text" id="reimDescription" name="reimDescription">
+    <input type="text" id="reimDescription" name="reimDescription"> -->
     <!-- <label for="reimStatus">Status</label>
     <input type="text" id="reimStatus" name="reimStatus"> -->
     <!-- <label for="homeRegion">Home's Region</label>
@@ -85,18 +128,17 @@
     <input type="text" id="homeCountry" name="homeCountry"> -->
   </form>
 
-<form>
-  <label for="statId">Status ID</label>
-  <input type="text" id="statId" name="statId">
-</form>
+
+
+    
 
 
 
-  <button class="btn btn-primary" id="showReimButton">Show Reimbursements</button>
-  <button class="btn btn-primary" id="addReimButton">Add Reimbursement</button>
-  <button class="btn btn-primary" id="showUsersButton">Show Users</button>
-  <button class="btn btn-primary" id="filterStatusButton">Filter By Status</button>
+
+
+ 
+  
 
   <script src="HelloFS.js?2"></script>
-</body>
+
 </html>

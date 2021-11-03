@@ -14,9 +14,9 @@ import com.revature.utils.HibUtil;
 public class ReimbursementDAOImp implements ReimbursementDAO {
 
 	@Override
-	public List<Ers_Reimbursement> findAllPast(int id) {
+	public List<Ers_Reimbursement> findAllPast(String username) {
 		Session session = HibUtil.getSession();
-		return session.createQuery("FROM Ers_Reimbursement WHERE Reimb_Author = " +(id)).list();
+		return session.createQuery("FROM Ers_Reimbursement WHERE Reimb_Author = " +(username)).list();
 	}
 
 	@Override

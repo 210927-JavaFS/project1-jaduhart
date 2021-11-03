@@ -6,7 +6,7 @@ import com.revature.models.Ers_Reimbursement;
 import com.revature.models.Ers_Users;
 
 public interface ReimbursementDAO {
-	public List<Ers_Reimbursement> findAllPast(int id);
+	public List<Ers_Reimbursement> findAllPast(String username);
 	public List<Ers_Reimbursement> findAll();
 	public List<Ers_Reimbursement> findAllByStatus(int id);
 	public Ers_Reimbursement findReim(int id);

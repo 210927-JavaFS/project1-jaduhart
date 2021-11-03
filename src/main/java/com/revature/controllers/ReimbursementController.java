@@ -50,7 +50,10 @@ public class ReimbursementController implements Controller {
 
 	public Handler updateReim = (ctx) -> {
 		Ers_Reimbursement reim = ctx.bodyAsClass(Ers_Reimbursement.class);
-		
+		HttpSession userSess = ctx.req.getSession(false);
+		Ers_Users curUser = (Ers_Users) userSess.getAttribute("user");
+		System.err.println(curUser);
+		reim.setReimb_Res(curUser);
 		//not trying to add but cupdate, but idk how to mention the parameters
 		if (reimService.updateReim(reim)) {
 			ctx.status(200);
@@ -83,13 +86,23 @@ public class ReimbursementController implements Controller {
 		ctx.status(200);
 	};
 
+	public Handler getAllUserReim = (ctx) -> {
+		String userId = ctx.pathParam("userId");
+		//int statInt = Integer.parseInt(userId);
+
+		List<Ers_Reimbursement> list = reimService.getPastReim(userId);
+
+		ctx.json(list);
+		ctx.status(200);
+	};
 	@Override
 	public void addRoutes(Javalin app) {
 		app.get("/Ers_Reimbursement", this.getAllReim);
 		app.get("/Ers_Reimbursement/:Ers_Reimbursement", this.getReim);
 		app.post("/Ers_Reimbursement", this.addReim);
-		app.post("/Ers_Reimbursement:Ers_Reimbursement", this.updateReim);
+		app.put("/Ers_Reimbursement", this.updateReim);
 		app.get("/Ers_Reimbursement/Open/:statId", this.getAllReimPen);
+		app.get("/Ers_Reimbursement/Open/:userId", this.getAllUserReim);
 
 	}
 

@@ -4,10 +4,18 @@ let buttonRow = document.getElementById("buttonRow");
 let pastReimButton = document.getElementById("pastReimButton");
 let addReimButton = document.getElementById('addReimButton');
 let loginButton = document.getElementById('loginButton');
-let getReimButton = document.createElement('getReim');
+let getReimButton = document.getElementById('getReimButton');
 let showReimButton = document.getElementById('showReimButton');
 let getUsersButton = document.getElementById('showUsersButton');
 let getStatIdButton = document.getElementById('filterStatusButton');
+let root = document.getElementById('root');
+let row = document.getElementById('row');
+
+//let contents = row.innerHTML;
+//document.getElementsByClassName("row")[0].innerHTML = "";
+root.appendChild(loginOrOut);
+//root.appendChild(allUsersButtonForm)
+//let curReim = document.createElement
 
 //let authString = 0;
 
@@ -25,9 +33,10 @@ pastReimButton.onclick = getReims;
 showReimButton.onclick = getReims;
 addReimButton.onclick = addReim;//was addReim
 loginButton.onclick = loginToApp; 
-getReimButton.innerText = "get Reimbursements";
-getUsersButton.onclick = getUsers;
+getReimButton.onclick = applyChange;
+getUsersButton.onclick = getReimsbyUser;
 getStatIdButton.onclick = getReimsbyStat;
+
 
 
 
@@ -51,14 +60,15 @@ async function loginToApp(){
   if(response.status===200 && curUser.user_Role.user_Role_Id  == 1 ){
     
     document.getElementsByClassName("formClass")[0].innerHTML = '';
-    
-    buttonRow.appendChild(getReimButton);
+    pageDecide(1);
+    //buttonRow.appendChild(getReimButton);
    // buttonRow.appendChild(reimButton);
   }
   
   else if(response.status===200 && curUser.user_Role.user_Role_Id == 2){
     document.getElementsByClassName("formClass")[0].innerHTML = '';
-    buttonRow.appendChild(getReimButton);
+    //root.appendChild(allUsersButtonForm);
+    pageDecide(2);
    // buttonRow.appendChild(reimButton);
   }
   else{
@@ -82,6 +92,7 @@ async function getReims(){
     console.log("ResponseStat !=200, populateReimTable never called");
   }
 };
+
 
 function populateReimTable(data){
   let tbody = document.getElementById("reimBody");
@@ -172,6 +183,20 @@ function populateReimTable(data){
       console.log("ResponseStat !=200, populateReimTable never called");
     }
   };
+  
+  
+  async function getReimsbyUser(){
+    let id = curUser.username;
+    let response = await fetch(URL+"Ers_Reimbursement/Open/"+ id );
+  
+    if(response.status === 200){
+      let data = await response.json();
+      console.log(data)
+      populateReimTable(data);
+    }else{
+      console.log("ResponseStat !=200, populateReimTable never called");
+    }
+  };
     //else if(cell=="receipt"&&Ers_Reimbursement[cell]){//if null: false. else true.
     //     td.innerText = `${Ers_Reimbursement[cell]}  `
     // }else if(Ers_Reimbursement[cell]){
@@ -193,12 +218,22 @@ function convertTimestamp(unix_timestamp){
   return date;
 }
 
-function financeManagerPage(){
+function pageDecide(data){
+  if(data === 1){
+    console.log("page decision 1 ")
+    //document.getElementsByClassName("formClass")[0].innerHTML = "";
+    root.appendChild(allUsersButtonForm);
+    root.appendChild(adminButtonForm);
+    //document.getElementsByClassName("row")[0].innerHTML = contents;
+} else {
+  console.log("page decision 2")
+  root.appendChild(allUsersButtonForm);
+  //document.getElementsByClassName("row")[0].innerHTML = contents;
+  //root.appendChild(adminButtonForm);
+}
 
 }
-function financeEmployeePage(){
 
-}
 
 async function getUsers(){
   let response = await fetch(URL+"users");
@@ -294,3 +329,125 @@ async function addReim(){
     console.log("Something went wrong creating your reim.")
   }
 }
+
+
+async function getReim(){
+  let id = document.getElementById('alterId').value;
+  let response = await fetch(URL+"Ers_Reimbursement/" + id);
+
+  if(response.status === 200){
+    let data = await response.json();
+    console.log(data)
+    // let curReim = JSON.parse(data);
+    // console.log(curReim);
+    // console.log(curReim.reim_StatId.reimb_Stat);
+    approveDenyReimb(data);
+    //populateReimTable(data);
+    //sessionStorage.setItem('curReim', JSON.stringify(data))
+
+  }else{
+    console.log("ResponseStat !=200, populateReimTable never called");
+    return null;
+  }
+};
+
+async function approveDenyReimb(data){
+  // let getReim();
+  let newReimbStatusId = STATUSPENDING;
+  let selection = document.getElementById("newStat").value;
+  switch(selection.toUpperCase()){
+      case 'APPROVED':
+           newReimbStatusId = STATUSAPPROVED;
+           console.log("this is seen")
+          break;
+      case 'DENIED':
+          newReimbStatusId = STATUSDENIED;
+          console.log(" why is this seen")
+          break;
+  }
+  // for (let user of data){
+  let reimbursement =  {
+    reimb_Id : `${data.reimb_Id}`,
+    reimb_Resd: new Date().toISOString(),
+    // reimb_Des: newDescription,
+    // reimb_Auth: null,
+    reimb_Res: null,
+    reimb_StatId: newReimbStatusId
+    // reimb_TypeId: newReimbType
+    }
+  // }
+    console.log(reimbursement);
+    return reimbursement
+  // let reimb = sessionStorage.getItem('curReim');
+  // let curReim = JSON.parse(reimb);
+  // console.log(curReim);
+  // let newReimbResolved = new Date();
+  // 
+  // let selection = document.getElementById('appDenyReimbursment').onclick = function() {
+  //     var e = document.getElementById("approvedDenyReimbursement");
+  //     var value = e.options[e.selectedIndex].value;
+  //     return value;
+  // }
+  
+
+  
+  
+
+  // let reimb = {
+  //     reimbId: typedReimbId,
+  //     reimbResolved: newReimbResolved,
+  //     reimbResolver: resolvedBy,
+      
+  //     reimbStatusId: newReimbStatusId,
+     
+ 
+  // console.log(newReimbStatusId);
+  // let reimbursement =  {
+  //   reimb_Amt: newAmount,
+  //   reimb_Sub: new Date().toISOString(),
+  //   reimb_Des: newDescription,
+  //   reimb_Auth: null,
+  //   reimb_Res: null,
+  //   reimb_StatId: STATUSPENDING,
+  //   reimb_TypeId: newReimbType
+  //   }
+  
+  // return reimbursement;
+  
+  
+  
+  // let response = await fetch(URL + "reimbs/reimb", {
+  //     method: 'POST',
+  //     body: JSON.stringify(reimb),
+  //     credentials: "include"
+  // });
+  //     if(response.status === 200){
+  //         console.log(reimb);
+  //         console.log("Reimbursment update");
+  //     } else {
+  //      console.log("Soemthing went wrong");
+  //      console.log(reimb);
+  //     } 
+      // console.log(data);
+      //     let response2 = await fetch(URL + "reimbs/reimb", {
+      //         method: 'POST',
+      //         body: JSON.stringify(reimb),
+      //         credentials: "include"
+      //         });
+  }
+  async function applyChange(){
+      let  reimbursement = getReim();
+      console.log(reimbursement);
+    
+      let response = await fetch(URL+"Ers_Reimbursement", {
+        method:'PUT',
+        body:JSON.stringify(reimbursement)
+      });
+    
+      if(response.status===201){
+        console.log("reim created successfully.");
+      }else{
+        console.log("Something went wrong creating your reim.");
+        console.log (response.status);
+      }
+    }

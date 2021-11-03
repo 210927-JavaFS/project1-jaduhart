@@ -2,6 +2,8 @@ package com.revature.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.revature.models.Ers_Users;
 import com.revature.models.LoginDTO;
 import com.revature.services.ErsUserService;
@@ -70,9 +72,12 @@ private LoginService loginService = new LoginService();
 //	};
 	private Handler loginAttempt = ctx -> {
 		    LoginDTO loginDTO = ctx.bodyAsClass(LoginDTO.class);
+		    System.err.println(loginDTO);
 		    Ers_Users loggedInUser = loginService.login(loginDTO);
+		    System.err.println(loggedInUser);
 		    if (loggedInUser != null) {
-		        ctx.req.getSession();
+		        HttpSession userSess = ctx.req.getSession() ;
+		        userSess.setAttribute("user", loggedInUser);
 		        ctx.json(loggedInUser);
 		        ctx.status(200);
 		    } else {

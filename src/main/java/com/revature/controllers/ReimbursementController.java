@@ -2,7 +2,10 @@ package com.revature.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.revature.models.Ers_Reimbursement;
+import com.revature.models.Ers_Users;
 import com.revature.services.ErsReimbursementService;
 
 import io.javalin.Javalin;
@@ -33,6 +36,11 @@ public class ReimbursementController implements Controller {
 
 	public Handler addReim = (ctx) -> {
 		Ers_Reimbursement reim = ctx.bodyAsClass(Ers_Reimbursement.class);
+		HttpSession userSess = ctx.req.getSession(false);
+		Ers_Users curUser = (Ers_Users) userSess.getAttribute("user");
+		System.err.println(curUser);
+		reim.setReimb_Auth(curUser);
+		System.err.println(reim);
 		if (reimService.addReim(reim)) {
 			ctx.status(201);
 		} else {
@@ -40,7 +48,7 @@ public class ReimbursementController implements Controller {
 		}
 	};
 
-	public Handler updateReimb = (ctx) -> {
+	public Handler updateReim = (ctx) -> {
 		Ers_Reimbursement reim = ctx.bodyAsClass(Ers_Reimbursement.class);
 		
 		//not trying to add but cupdate, but idk how to mention the parameters
@@ -65,12 +73,23 @@ public class ReimbursementController implements Controller {
 //			ctx.status(406);
 //		}
 	//};
+	public Handler getAllReimPen = (ctx) -> {
+		String statId = ctx.pathParam("statId");
+		int statInt = Integer.parseInt(statId);
+
+		List<Ers_Reimbursement> list = reimService.allReimByStat(statInt);
+
+		ctx.json(list);
+		ctx.status(200);
+	};
 
 	@Override
 	public void addRoutes(Javalin app) {
 		app.get("/Ers_Reimbursement", this.getAllReim);
 		app.get("/Ers_Reimbursement/:Ers_Reimbursement", this.getReim);
 		app.post("/Ers_Reimbursement", this.addReim);
+		app.post("/Ers_Reimbursement:Ers_Reimbursement", this.updateReim);
+		app.get("/Ers_Reimbursement/Open/:statId", this.getAllReimPen);
 
 	}
 

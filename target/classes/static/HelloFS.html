@@ -10,8 +10,7 @@
 <body class="container-fluid">
   <div class="row">
     <button id="pastReimButton" class="btn btn-success">Past Tickets</button>  
-    <!-- <button id="loginButton" class="btn btn-success">Login</button>   -->
-  </div>
+    <div id="buttonRow" class="btn btn-success">Login </div>
   <div class="formClass" id="loginOrOut">
     <form class="form-control">
       <label for="username">Username</label>
@@ -42,7 +41,7 @@
   <table class="table">
     <thead>
       <tr>
-        <th class="col-sm-2">Reimbursement ID</th>
+        <th class="col-sm-2"> Reimbursement ID</th> <!--   Amount;      Submitted;      Resolved;      Author;     Resolver;     Type;     Status</th> --> 
         <th class="col-sm-2">Amount</th>
         <th class="col-sm-2">Submitted</th>
         <th class="col-sm-2">Resolved</th>
@@ -55,13 +54,22 @@
     <tbody id="reimBody">
     </tbody>
   </table>
+<!-- <div class="table" id="ReimbID">Reimbursement ID</div>
+<div class="table" id="Amount">Amount</div>
+<div class="table" id="Submitted"> Submitted</div>
+<div class="table" id="Resolved">Resolved</div>
+<div class="table" id="Author"> Author</div>
+<div class="table" id="Resolver">Resolver</div>
+<div class="table" id="Type">Type</div>
+<div class="table" id="Status">Status</div> -->
+
 
   <br>
   <br>
 
   <form class="form-control">
     <!--make these form button labels-->
-    <label for="reimType">Reimbursement Type</label>
+    <label for="reimType">Reimbursement Type (1-4)</label>
     <input type="text" id="reimType" name="reimType">
     <label for="reimAmount">Amount</label>
     <input type="text" id="reimAmount" name="reimAmount">
@@ -76,8 +84,18 @@
     <label for="homeCountry">Home's Country</label>
     <input type="text" id="homeCountry" name="homeCountry"> -->
   </form>
-  <button class="btn btn-primary" id="addReimButton">Show Reimbursements</button>
+
+<form>
+  <label for="statId">Status ID</label>
+  <input type="text" id="statId" name="statId">
+</form>
+
+
+
+  <button class="btn btn-primary" id="showReimButton">Show Reimbursements</button>
+  <button class="btn btn-primary" id="addReimButton">Add Reimbursement</button>
   <button class="btn btn-primary" id="showUsersButton">Show Users</button>
+  <button class="btn btn-primary" id="filterStatusButton">Filter By Status</button>
 
   <script src="HelloFS.js?2"></script>
 </body>

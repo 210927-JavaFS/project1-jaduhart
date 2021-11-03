@@ -70,8 +70,8 @@ public class UserDAOImp implements UserDAO {
 	@Override
 	public Ers_Users getUserByName(String name) {
 		Session session = HibUtil.getSession();
-		Query query = session.createQuery(" FROM Ers_Users WHERE Ers_Users.Username = " +name);
-		query.setParameter("userName", name);
+		Query query = session.createQuery("FROM Ers_Users AS es WHERE es.Username = :uname");
+		query.setParameter("uname", name);
 		List<Ers_Users> list = query.list();
 		
 	    Ers_Users user = list.get(0);

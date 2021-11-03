@@ -13,8 +13,11 @@ public class LoginService {
 
     public Ers_Users login(LoginDTO loginDTO) {
         Ers_Users user = userDAO.getUserByName(loginDTO.getUsername());
+        System.err.println(user);
         String password = loginDTO.getPassword();
-        if (user != null && password == user.getPassword()) {
+        System.err.println(loginDTO.getPassword());
+        System.err.println(user.getPassword());
+        if ( user!= null && password.equals( user.getPassword())) {
             return user;
         }
         return null;

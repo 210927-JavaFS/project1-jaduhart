@@ -3,6 +3,22 @@
 ## Executive Summary
 The Expense Reimbursement System (ERS) will manage the process of reimbursing employees for expenses incurred while on company time. All employees in the company can login and submit requests for reimbursement and view their past tickets and pending requests. Finance managers can log in and view all reimbursement requests and past history for all employees in the company. Finance managers are authorized to approve and deny requests for expense reimbursement.
 
+**Technologies Used:**
+Java, SQL, CSS, HTML, JavaScript, JUnit, Hibernate, AWS RDS, Log4J, Javalin
+
+**Features**
+Login
+Employees can add Reimbursements that are persisted in a back end database
+Employees can also view Reimburesements by their resolvement status
+Console logs difference between Employee and Finance Manager
+
+**Set Up**
+Clone the repository onto client server with git
+Import an existing Maven project into client IDE & select newly cloned folder
+Create schema in database called ers_reimbursement
+Run the Main class as a java application
+Navigate to localhost:8081/helloFS.html
+
 **State-chart Diagram (Reimbursement Statuses)** 
 ![](./imgs/state-chart.jpg)
 
@@ -22,12 +38,4 @@ Employees must select the type of reimbursement as: LODGING, TRAVEL, FOOD, or OT
 **Activity Diagram**
 ![](./imgs/activity.jpg)
 
-## Technical Requirements
 
-The back-end system shall use Hibernate to connect to an AWS RDS Postgres database. The middle tier shall use Javalin technology for dynamic Web application development. The front-end view shall use HTML/JavaScript to make an application that can call server-side components RESTfully. Passwords shall be encrypted in Java and securely stored in the database. The middle tier shall follow proper layered architecture, have reasonable (~70%) test coverage of the service layer, and implement Logback for appropriate logging. 
-
-**Stretch Goals:**
-* Replace HTML/JavaScript with an Angular single page application.
-* Users can upload a document or image of their receipt when submitting reimbursements which can stored in the database and reviewed by a financial manager.
-* Application shall be hosted remotely on an EC2.
-* Static files (webpages) shall be hosted on an S3 bucket. 
